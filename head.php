@@ -5,7 +5,7 @@
 3. smarty_01
  */
 session_start(); //啟用 $_SESSION,前面不可以有輸入任何指令或空格,放在伺服端,一定執行
-error_reporting(E_ALL);@ini_set('display_errors', true); //設定所有錯誤都顯示
+error_reporting(E_ALL);@ini_set('display_errors', true); //設定有錯誤時,顯示錯誤
 $http = 'http://';
 if (!empty($_SERVER['HTTPS'])) { // !代表反意,empty代表空 反意,!empty會負負的正,數字0為假,0以外為真
     $http = ($_SERVER['HTTPS'] == 'on') ? 'https://' /* ←成立的話 */ : 'http://' /* ←不成立的話 */ ;
@@ -33,4 +33,6 @@ require_once _WEB_PATH.'/smarty.php';
 #引入資料庫設定
 // require_once _WEB_PATH.'/sqlConfig.php';
 #引入設定檔,引入所有function
-// require_once _WEB_PATH . '/function.php';
+require_once _WEB_PATH . '/function.php';
+
+$_SESSION['admin'] = ($_SESSION['admin']) ? $_SESSION['admin'] : false ; 
