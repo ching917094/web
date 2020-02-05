@@ -48,6 +48,8 @@ $smarty->display('user.tpl');
 /*---- 函數區-----*/
 function logout() {
     $_SESSION['admin']="";
+    setcookie("name", "" , time()- 3600 * 24 * 365); //登出後清除COOKIE
+    setcookie("token", "" , time()- 3600 * 24 * 365); //登出後清除COOKIE
 }
 
 function xxx(){
@@ -58,9 +60,15 @@ function login(){
     global $smarty;
     $name = "admin";
     $pass = "111111";
+    $token = "xxxxxx"; //讓密碼不會直接被記憶,是隱藏的
     if($name == $_POST['name'] and $pass == $_POST['pass']){
         $_SESSION['admin'] = true;
-        header("location:index.php");//注意前面不可以有輸出
+        $_POST['remember'] = isset($_POST['remember']) ? $_POST['remember'] : ""; //是否記住密碼的判斷式
+        if($_POST['remember']) { //如果選要記住
+            setcookie("name", $name, time()+ 3600 * 24 * 365); //time()+3600 * 24 * 365 記住多久,此為一年
+            setcookie("token", $token, time()+ 3600 * 24 * 365); 
+        }
+        header("location:index.php");//所有動作需在頁面挑轉之前完成
     } else {
         header("location:user.php");
     }

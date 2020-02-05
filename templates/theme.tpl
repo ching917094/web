@@ -48,6 +48,18 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact"><{$a3}></a>
           </li>
+          <{if $smarty.session.admin}> <!--是管理員時顯示-->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="user.php">管理員</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="user.php?op=logout">登出</a>
+          </li>              
+          <{else}> <!--不是管理員時顯示-->
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="user.php">登入</a>
+            </li>
+          <{/if}>
         </ul>
       </div>
     </div>

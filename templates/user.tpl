@@ -11,11 +11,10 @@
         <title>會員管理</title>
     </head>
     <body>
-    <{if $smarty.session.admin}> <!--是管理員時-->
+    <{if $smarty.session.admin}> <!--是管理員時顯示-->
     <!-- $smarty.session(smarty變數).admin(連結到自己取的變數名稱) -->
-    <{include file="tpl/admin.tpl"}> <!--include file引入檔案,將登入畫面檔案login.tpl引入-->
-    
-    <{else}> <!--不是管理員時,跑登入畫面-->
+        <{include file="tpl/admin.tpl"}>
+    <{else}> <!--不是管理員時顯示,跑登入畫面-->
         <{include file="tpl/login.tpl"}> <!--include file引入檔案,將登入畫面檔案login.tpl引入-->
     <{/if}>
         

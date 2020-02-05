@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-05 06:05:00
+/* Smarty version 3.1.34-dev-7, created on 2020-02-05 07:36:15
   from 'D:\PHP\xampp\htdocs\web\templates\user.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e3a4cfc588700_23007676',
+  'unifunc' => 'content_5e3a625fdf76a7_05999845',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dc9985d4bb488142f1a312e108dbac6e9dd57a36' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\user.tpl',
-      1 => 1580875208,
+      1 => 1580884508,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:tpl/login.tpl' => 1,
   ),
 ),false)) {
-function content_5e3a4cfc588700_23007676 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e3a625fdf76a7_05999845 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
     <head>
@@ -37,12 +37,11 @@ bootstrap/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9D
         <title>會員管理</title>
     </head>
     <body>
-    <?php if ($_SESSION['admin']) {?> <!--是管理員時-->
+    <?php if ($_SESSION['admin']) {?> <!--是管理員時顯示-->
     <!-- $smarty.session(smarty變數).admin(連結到自己取的變數名稱) -->
-    <?php $_smarty_tpl->_subTemplateRender("file:tpl/admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?> <!--include file引入檔案,將登入畫面檔案login.tpl引入-->
-    
-    <?php } else { ?> <!--不是管理員時,跑登入畫面-->
+        <?php $_smarty_tpl->_subTemplateRender("file:tpl/admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+    <?php } else { ?> <!--不是管理員時顯示,跑登入畫面-->
         <?php $_smarty_tpl->_subTemplateRender("file:tpl/login.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?> <!--include file引入檔案,將登入畫面檔案login.tpl引入-->
     <?php }?>
