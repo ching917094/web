@@ -35,4 +35,5 @@ require_once _WEB_PATH.'/smarty.php';
 #引入設定檔,引入所有function
 require_once _WEB_PATH . '/function.php';
 
-$_SESSION['admin'] = ($_SESSION['admin']) ? $_SESSION['admin'] : false ; 
+$_SESSION['admin'] = ($_SESSION['admin']) ? $_SESSION['admin'] : false ; // 登入用
+// 設定一個變數$_SESSION['admin(自訂的變數名稱)'] = SESSION變數判斷式→($_SESSION['admin']) ? $_SESSION['admin'] : false ; ?後為正確時指令 :後為錯誤時指令

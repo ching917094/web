@@ -6,6 +6,8 @@ $smarty->assign("a1", "服務項目");
 $smarty->assign("a2", "產品目錄");
 $smarty->assign("a3", "聯絡我們");
 
+// echo $_SESSION['admin'];die(); 用來檢查是否有登入
+
 /*---- 程式結尾-----*/
 $smarty->display('theme.tpl');
 

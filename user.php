@@ -12,7 +12,7 @@
 require_once 'head.php';
 
 /* 過濾變數，設定預設值 */
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
+$op = system_CleanVars($_REQUEST, 'op', '', 'string'); //REQUEST 包含全部請求碼
 $sn = system_CleanVars($_REQUEST, 'sn', '', 'int');  // sn序號,也可用id
 
 /* 程式流程 */
@@ -22,7 +22,12 @@ switch ($op){
     header("location:index.php");//header("location:index.php")為轉向,注意前面不可以有echo輸出
     exit; // 同等die();離開,但不會顯示
 
-    case "login" :
+    case "logout" : //登出用,在user.php網址後加上?op=loguot
+    $msg = logout();
+    header("location:index.php");//注意前面不可以有輸出
+    exit;
+
+    case "login" :  //登入用
     $msg = login();
     header("location:index.php");//注意前面不可以有輸出
     exit;
@@ -41,6 +46,10 @@ $smarty->assign("op", $op);
 $smarty->display('user.tpl');
 
 /*---- 函數區-----*/
+function logout() {
+    $_SESSION['admin']="";
+}
+
 function xxx(){
     global $smarty;
     
