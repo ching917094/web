@@ -7,14 +7,14 @@
                     <div class="card-header">
                         管理員
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <a href="index.php">
-                            <li class="list-group-item">首頁</li>
+                    <ul class="list-group list-group-flush">                                                 
+                        <li class="list-group-item"> 
+                            <a href="index.php" class="btn-block">首頁</a>   
+                        </li>
+                        <a href="user.php?op=logout" class="list-group-item">
+                            <li style="list-style-type:none">登出</li>
                         </a>
-                        <a href="index.php?op=logout">
-                            <li class="list-group-item">登出</li>
-                        </a>                    
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        <!-- 首頁/登出 全區域可點的兩種寫法 -->
                     </ul>
                 </div>
         </div>
