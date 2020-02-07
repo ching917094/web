@@ -1,4 +1,27 @@
-<style>
+<?php
+/* Smarty version 3.1.34-dev-7, created on 2020-02-07 04:00:17
+  from 'D:\PHP\xampp\htdocs\web\templates\tpl\login_form.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.34-dev-7',
+  'unifunc' => 'content_5e3cd2c1c450e7_93515408',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'b6d446d94efe2dfc40574d57004e2eb7ffc0a3de' => 
+    array (
+      0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\login_form.tpl',
+      1 => 1581044367,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5e3cd2c1c450e7_93515408 (Smarty_Internal_Template $_smarty_tpl) {
+?><style>
         .form-signin {
             width: 100%;
             max-width: 400px;
@@ -27,7 +50,10 @@
             <input type="hidden" name="op" id="op" value="login">
             <button class="btn btn-lg btn-primary btn-block" type="submit">會員登入</button>
             <div>
-                您還沒還沒註冊嗎？請 <a href="#">點選此處註冊您的新帳號</a>。
+                您還沒還沒註冊嗎？請 <a href="user.php?op=reg_form">點選此處註冊您的新帳號</a>。
             </div>
         </form>
-    </div>
+        <!-- <h2><?php echo $_smarty_tpl->tpl_vars['op']->value;?>
+</h2> 用來檢視防止惡意攻擊有沒有成功,成功後不管打甚麼都是出現login_form -->
+    </div><?php }
+}

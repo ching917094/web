@@ -1,28 +1,29 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-05 07:36:15
+/* Smarty version 3.1.34-dev-7, created on 2020-02-07 04:02:55
   from 'D:\PHP\xampp\htdocs\web\templates\user.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e3a625fdf76a7_05999845',
+  'unifunc' => 'content_5e3cd35f4cf390_83373918',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dc9985d4bb488142f1a312e108dbac6e9dd57a36' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\user.tpl',
-      1 => 1580884508,
+      1 => 1581044566,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:tpl/admin.tpl' => 1,
-    'file:tpl/login.tpl' => 1,
+    'file:tpl/login_form.tpl' => 1,
+    'file:tpl/reg_form.tpl' => 1,
   ),
 ),false)) {
-function content_5e3a625fdf76a7_05999845 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e3cd35f4cf390_83373918 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
     <head>
@@ -37,13 +38,19 @@ bootstrap/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9D
         <title>會員管理</title>
     </head>
     <body>
-    <?php if ($_SESSION['admin']) {?> <!--是管理員時顯示-->
-    <!-- $smarty.session(smarty變數).admin(連結到自己取的變數名稱) -->
+    <?php if ($_SESSION['admin']) {?> <!-- $smarty.session(smarty變數).admin(連結到自己取的變數名稱) -->
+        <!--是管理員時顯示-->    
         <?php $_smarty_tpl->_subTemplateRender("file:tpl/admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-    <?php } else { ?> <!--不是管理員時顯示,跑登入畫面-->
-        <?php $_smarty_tpl->_subTemplateRender("file:tpl/login.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+    <?php } else { ?> 
+        <!--不是管理員時顯示-->
+        <?php if ($_smarty_tpl->tpl_vars['op']->value == "login_form") {?> <!--跑登入畫面-->
+            <?php $_smarty_tpl->_subTemplateRender("file:tpl/login_form.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?> <!--include file引入檔案,將登入畫面檔案login.tpl引入-->
+        <?php } elseif ($_smarty_tpl->tpl_vars['op']->value == "reg_form") {?> <!--如果未註冊,去註冊畫面-->
+            <?php $_smarty_tpl->_subTemplateRender("file:tpl/reg_form.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+        <?php }?>
     <?php }?>
         
         
