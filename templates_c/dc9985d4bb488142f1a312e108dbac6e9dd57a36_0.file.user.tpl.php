@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-07 04:02:55
+/* Smarty version 3.1.34-dev-7, created on 2020-02-13 08:22:09
   from 'D:\PHP\xampp\htdocs\web\templates\user.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e3cd35f4cf390_83373918',
+  'unifunc' => 'content_5e44f921be7948_40699426',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dc9985d4bb488142f1a312e108dbac6e9dd57a36' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\user.tpl',
-      1 => 1581044566,
+      1 => 1581578525,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:tpl/reg_form.tpl' => 1,
   ),
 ),false)) {
-function content_5e3cd35f4cf390_83373918 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e44f921be7948_40699426 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
     <head>
@@ -36,25 +36,6 @@ function content_5e3cd35f4cf390_83373918 (Smarty_Internal_Template $_smarty_tpl)
 bootstrap/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         
         <title>會員管理</title>
-    </head>
-    <body>
-    <?php if ($_SESSION['admin']) {?> <!-- $smarty.session(smarty變數).admin(連結到自己取的變數名稱) -->
-        <!--是管理員時顯示-->    
-        <?php $_smarty_tpl->_subTemplateRender("file:tpl/admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
-    <?php } else { ?> 
-        <!--不是管理員時顯示-->
-        <?php if ($_smarty_tpl->tpl_vars['op']->value == "login_form") {?> <!--跑登入畫面-->
-            <?php $_smarty_tpl->_subTemplateRender("file:tpl/login_form.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?> <!--include file引入檔案,將登入畫面檔案login.tpl引入-->
-        <?php } elseif ($_smarty_tpl->tpl_vars['op']->value == "reg_form") {?> <!--如果未註冊,去註冊畫面-->
-            <?php $_smarty_tpl->_subTemplateRender("file:tpl/reg_form.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
-        <?php }?>
-    <?php }?>
-        
-        
-        
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <?php echo '<script'; ?>
@@ -69,6 +50,50 @@ bootstrap/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi
  src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
 bootstrap/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"><?php echo '</script'; ?>
 >
+    
+    </head>
+    <body>
+                <?php if ($_smarty_tpl->tpl_vars['redirect']->value) {?> <!--如果有傳送值才啟用這個效果-->
+        <!-- sweetalert2 -->
+        <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.css">
+        <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
+>
+            window.onload = function() {
+                Swal.fire({
+                // position: 'top-end', 顯示在右上
+                icon: 'success',
+                title: "<?php echo $_smarty_tpl->tpl_vars['message']->value;?>
+",
+                showConfirmButton: false, // 不顯示確認按鈕
+                timer: '<?php echo $_smarty_tpl->tpl_vars['time']->value;?>
+' // 秒數到了自動消失
+                })
+            }
+        <?php echo '</script'; ?>
+>
+        <?php }?>
+        <?php if ($_SESSION['admin']) {?> <!-- $smarty.session(smarty變數).admin(連結到自己取的變數名稱) -->
+            <!--是管理員時顯示-->    
+            <?php $_smarty_tpl->_subTemplateRender("file:tpl/admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+        <?php } else { ?> 
+            <!--不是管理員時顯示-->
+            <?php if ($_smarty_tpl->tpl_vars['op']->value == "login_form") {?> <!--跑登入畫面-->
+                <?php $_smarty_tpl->_subTemplateRender("file:tpl/login_form.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?> <!--include file引入檔案,將登入畫面檔案login.tpl引入-->
+            <?php } elseif ($_smarty_tpl->tpl_vars['op']->value == "reg_form") {?> <!--如果未註冊,去註冊畫面-->
+                <?php $_smarty_tpl->_subTemplateRender("file:tpl/reg_form.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+            <?php }?>
+        <?php }?>
+        
+        
+        
     </body>
     
 </html><?php }

@@ -14,6 +14,9 @@
                         <a href="user.php?op=logout" class="list-group-item">
                             <li style="list-style-type:none">登出</li>
                         </a>
+                        <a href="http://localhost/adminer/adminer.php" class="list-group-item" target="_blank">
+                            <li style="list-style-type:none">資料庫管理</li> <!--target="_blank"開新視窗-->
+                        </a>
                         <!-- 首頁/登出 全區域可點的兩種寫法 -->
                     </ul>
                 </div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-05 07:36:13
+/* Smarty version 3.1.34-dev-7, created on 2020-02-13 08:22:37
   from 'D:\PHP\xampp\htdocs\web\templates\theme.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e3a625d755866_65085795',
+  'unifunc' => 'content_5e44f93d4db968_91667815',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4e5ac8bedde17635334320d7a2bf313c97e459aa' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\theme.tpl',
-      1 => 1580884570,
+      1 => 1581578550,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e3a625d755866_65085795 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e44f93d4db968_91667815 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +52,30 @@ css/creative.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
+        <?php if ($_smarty_tpl->tpl_vars['redirect']->value) {?> <!--如果有傳送值才啟用這個效果-->
+    <!-- sweetalert2 -->
+    <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.css">
+    <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+>
+        window.onload = function() {
+            Swal.fire({
+            // position: 'top-end', 顯示在右上
+            icon: 'success',
+            title: "<?php echo $_smarty_tpl->tpl_vars['message']->value;?>
+",
+            showConfirmButton: false, // 不顯示確認按鈕
+            timer: '<?php echo $_smarty_tpl->tpl_vars['time']->value;?>
+' // 秒數到了自動消失
+            })
+        }
+    <?php echo '</script'; ?>
+>
+    <?php }?>
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">

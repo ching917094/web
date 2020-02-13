@@ -22,18 +22,19 @@ switch ($op){
     break; 
 
     case "logout" : //登出用,在user.php網址後加上?op=loguot
-    $msg = logout();
-    header("location:index.php");//注意前面不可以有輸出
+    $msg = logout();    
+    redirect_header ("user.php" , '登出成功' , 5000); 
+    // ↑調用轉向函式,括號內容依需求決定要不要下,轉向頁面,訊息,時間,如不下依預設去跑
     exit;
 
     case "reg" : //登出用,在user.php網址後加上?op=loguot
     $msg = reg();
-    header("location:index.php");//注意前面不可以有輸出
+    header("location:index.php");//所有動作需在頁面挑轉之前完成
     exit;
 
     case "login" :  //登入用
     $msg = login();
-    header("location:index.php");//header("location:index.php")為轉向,注意前面不可以有echo輸出
+    // header("location:index.php");//header("location:index.php")為轉向,注意前面不可以有echo輸出
     exit; // 同等die();離開,但不會顯示
 
     default: //網址後面亂輸入的人會跑這,用來防止惡意攻擊
@@ -89,9 +90,9 @@ function login(){
             setcookie("name", $name, time()+ 3600 * 24 * 365); //time()+3600 * 24 * 365 記住多久,此為一年
             setcookie("token", $token, time()+ 3600 * 24 * 365); 
         }
-        header("location:index.php");//所有動作需在頁面挑轉之前完成
+        redirect_header ("index.php" , '登入成功' , 3000);         
     } else {
-        header("location:user.php");
+        redirect_header ("user.php" , '登入失敗' , 3000); 
     }
     print_r($_POST); // 陣列也可用var_dump(內容顯示的比較多),但不能用echo
     die();
@@ -101,6 +102,14 @@ function logout() {
     $_SESSION['admin']="";
     setcookie("name", "" , time()- 3600 * 24 * 365); //登出後清除COOKIE
     setcookie("token", "" , time()- 3600 * 24 * 365); //登出後清除COOKIE
+}
+
+#轉向函式
+function redirect_header($url = "index.php" , $message = '訊息' , $time = 3000) {
+    $_SESSION['redirect'] = true; //呼叫這個函式,表示真時,要轉頁
+    $_SESSION['message'] = $message;
+    $_SESSION['time'] = $time;
+    header("location:{$url}"); // SESSION不會因轉頁,而消除紀錄,古前面用SESSION呼叫
 }
 
 function login_form(){

@@ -38,9 +38,25 @@ require_once _WEB_PATH . '/function.php';
 $_SESSION['admin'] = ($_SESSION['admin']) ? $_SESSION['admin'] : false ; // 登入用
 // 設定一個變數$_SESSION['admin(自訂的變數名稱)'] = SESSION變數判斷式→($_SESSION['admin']) ? $_SESSION['admin'] : false ; ?後為正確時指令 :後為錯誤時指令
 
-//記住我COOKIE判斷式
+#記住我COOKIE判斷式
 if(!$_SESSION['admin']) { //先判斷是否為管理員
     $_COOKIE['token'] = isset($_COOKIE['token']) ? $_COOKIE['token'] : "" ; //token是否正確的判斷式
     $_COOKIE['name'] = isset($_COOKIE['name']) ? $_COOKIE['name'] : "" ; //name是否正確的判斷式
     if($_COOKIE['name'] == "admin" and $_COOKIE['token'] == "xxxxxx")$_SESSION['admin'] = true; //↑如果name和token都正確時執行,登入正確的判斷式
 }
+
+#轉向用,送幾個值過去,就要有幾段
+#有呼叫才會有值,為了防止報錯,要給一個三元運算,讓他自己判斷是否有值
+$_SESSION['redirect'] = isset($_SESSION['redirect']) ? $_SESSION['redirect'] : "";
+$_SESSION['message'] = isset($_SESSION['message']) ? $_SESSION['message'] : "";
+$_SESSION['time'] = isset($_SESSION['time']) ? $_SESSION['time'] : "";
+
+#轉向用
+$smarty->assign("redirect" , $_SESSION['redirect']); //樣板使用法 <{$redirect}>
+$smarty->assign("message" , $_SESSION['message']);
+$smarty->assign("time" , $_SESSION['time']);
+
+#清理轉向過的值,不要每次都重複轉向
+$_SESSION['redirect'] = "";
+$_SESSION['message'] = "";
+$_SESSION['time'] = "";

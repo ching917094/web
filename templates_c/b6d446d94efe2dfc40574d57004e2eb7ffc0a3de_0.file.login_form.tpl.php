@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-07 04:00:17
+/* Smarty version 3.1.34-dev-7, created on 2020-02-13 09:39:24
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\login_form.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e3cd2c1c450e7_93515408',
+  'unifunc' => 'content_5e450b3ce85773_87015475',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b6d446d94efe2dfc40574d57004e2eb7ffc0a3de' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\login_form.tpl',
-      1 => 1581044367,
+      1 => 1581583158,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e3cd2c1c450e7_93515408 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e450b3ce85773_87015475 (Smarty_Internal_Template $_smarty_tpl) {
 ?><style>
         .form-signin {
             width: 100%;
@@ -55,5 +55,52 @@ function content_5e3cd2c1c450e7_93515408 (Smarty_Internal_Template $_smarty_tpl)
         </form>
         <!-- <h2><?php echo $_smarty_tpl->tpl_vars['op']->value;?>
 </h2> 用來檢視防止惡意攻擊有沒有成功,成功後不管打甚麼都是出現login_form -->
+    </div>
+    <div class="container mt-5">
+        <h1 class="text-center">聯絡我們</h1>
+        <!-- 表單返回頁，記得在表單加「 target='returnWin' 」 -->
+        <iframe name="returnWin" style="display: none;" onload="this.onload=function(){window.location='<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+../googleform/ok.html'}"></iframe>
+        <form target='returnWin' role="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfuu4A1egIRx7JBnv8Lh8VrqWXBVUeOanxxcdT59aWbwtdP4g/formResponse" method="post" id="myForm" >
+            <div class="row">
+                <!--姓名-->              
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label><span class="title">姓名</span><span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="entry.2038120686" id="name" value="">
+                        <!--type="number"限制他只能輸入數字 min=0限制數量不能小於0-->
+                    </div>
+                </div>          
+                <!--電話-->              
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label><span class="title">電話</span><span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="entry.984365608" id="tel" value="">
+                        <!--type="number"限制他只能輸入數字 min=0限制數量不能小於0-->
+                    </div>
+                </div>          
+                <!--email-->              
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label><span class="title">email</span><span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="entry.168253913" id="email" value="">
+                        <!--type="number"限制他只能輸入數字 min=0限制數量不能小於0-->
+                    </div>
+                </div>          
+            </div>                 
+            <div class="row">
+                <div class="col-sm-12">  
+                    <!-- 聯絡事項 -->
+                    <div class="form-group">
+                        <label class="control-label">聯絡事項</label>
+                        <textarea class="form-control" rows="5" id="contact" name="entry.1599838118"></textarea>
+                        <!--textarea表單元件,form-control拉到最寬+框線-->
+                    </div>
+                </div>
+            </div>        
+            <div class="text-center pb-3">
+                <button type="submit" class="btn btn-primary">送出</button>
+            </div>
+        </form>
     </div><?php }
 }
