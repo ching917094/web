@@ -1,7 +1,7 @@
-<div class="container mt-5">
-    <h1 class="text-center">註冊表單</h1>
+<div class="container mt-5" style="padding-top:50px">
+    <h3 class="text-center">註冊表單</h3>
     
-    <form action="user.php" method="post" id="myForm" class="mb-2" enctype="multipart/form-data"> <!--enctype傳檔案必用-->
+    <form action="index.php" method="post" id="myForm" class="mb-2" enctype="multipart/form-data"> <!--enctype傳檔案必用-->
     
     <div class="row">         
         <!--帳號-->              

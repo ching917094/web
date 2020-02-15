@@ -25,18 +25,8 @@ function system_CleanVars(&$global, $key, $default = '', $type = 'int') //()中�
   }
   return $ret;
 }
- 
- 
-###############################################################################
-#  轉向函數
-###############################################################################
-/*
-function redirect_header($url = "", $time = 3000, $message = '已轉向！！') {
-  $_SESSION['redirect'] = "\$.jGrowl('{$message}', {  life:{$time} , position: 'center', speed: 'slow' });";
-  header("location:{$url}");
-  exit;
-}
-*/
+  
+
 ###############################################################################
 #  取得目前網址
 ###############################################################################
@@ -86,4 +76,35 @@ if (!function_exists("mk_dir")) {
       mkdir($dir, 0777);
     }
   }
+}
+
+//檢查並傳回欲拿到資料使用的變數
+//$title = '' 則非必填
+function db_filter($var, $title = '', $filter = ''){
+  global $db;
+  #寫入資料庫過濾
+  $var = $db->real_escape_string($var);
+
+  if($title){
+    if($var === ""){
+      redirect_header("index.php?op=reg_form", $title . '為必填！');
+    }
+  }
+
+  if ($filter) {
+    $var = filter_var($var, $filter);
+    if (!$var) redirect_header("index.php?op=reg_form", "不合法的{$title}", 3000);
+  }
+  return $var;
+}
+###############################################################################
+#  轉向函數
+###############################################################################
+
+function redirect_header($url = "index.php", $message = '訊息', $time = 3000) {  
+  $_SESSION['redirect'] = true;
+  $_SESSION['message'] = $message;
+  $_SESSION['time'] = $time;
+  header("location:{$url}");//注意前面不可以有輸出
+  exit;
 }

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-13 03:56:30
+/* Smarty version 3.1.34-dev-7, created on 2020-02-15 03:29:31
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\reg_form.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e44bade5cbef2_28461723',
+  'unifunc' => 'content_5e47578be70070_14949951',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cdfaf6cd8aa3765f8c0c1be5ad5db943508a9463' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\reg_form.tpl',
-      1 => 1581562572,
+      1 => 1581733612,
       2 => 'file',
     ),
   ),
@@ -20,11 +20,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e44bade5cbef2_28461723 (Smarty_Internal_Template $_smarty_tpl) {
-?><div class="container mt-5">
-    <h1 class="text-center">註冊表單</h1>
+function content_5e47578be70070_14949951 (Smarty_Internal_Template $_smarty_tpl) {
+?><div class="container mt-5" style="padding-top:50px">
+    <h3 class="text-center">註冊表單</h3>
     
-    <form action="user.php" method="post" id="myForm" class="mb-2" enctype="multipart/form-data"> <!--enctype傳檔案必用-->
+    <form action="index.php" method="post" id="myForm" class="mb-2" enctype="multipart/form-data"> <!--enctype傳檔案必用-->
     
     <div class="row">         
         <!--帳號-->              
