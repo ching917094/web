@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-15 06:58:00
+/* Smarty version 3.1.34-dev-7, created on 2020-02-19 06:41:31
   from 'D:\PHP\xampp\htdocs\web\templates\admin.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e478868629290_90333020',
+  'unifunc' => 'content_5e4cca8be46197_79504768',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '15644c69c6b1afd6a0e5590f31d425bc000679f9' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\admin.tpl',
-      1 => 1581746146,
+      1 => 1582090773,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:tpl/user.tpl' => 1,
   ),
 ),false)) {
-function content_5e478868629290_90333020 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e4cca8be46197_79504768 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -34,6 +34,10 @@ function content_5e478868629290_90333020 (Smarty_Internal_Template $_smarty_tpl)
     <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
 bootstrap/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     
+    <!-- Font Awesome Icons -->
+    <link href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
+vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
     <title>會員管理</title>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

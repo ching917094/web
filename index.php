@@ -38,7 +38,7 @@ switch ($op){
     case "reg" :
         $msg = reg();    
         redirect_header("index.php", '註冊成功', 3000);
-        break;
+        exit;
     
     default: //網址後面亂輸入的人會跑這,用來防止惡意攻擊
         $op = "op_list";
