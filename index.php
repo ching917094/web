@@ -57,7 +57,7 @@ $smarty->assign("a4", "聯絡我們");
 
 /* ctrl+h取代 ctrl+f搜尋 */
 // print_r ($_COOKIE);die(); 用來檢查記住我的登入資料有沒有記錄到
-// echo $_SESSION['admin'];die(); 用來檢查是否有登入
+
 
 /*---- 程式結尾-----*/
 $smarty->display('theme.tpl');
@@ -102,32 +102,61 @@ function reg() {
     // print_r($uid);die("reg"); 測試寫入資料是否正確用
 }
 function login(){
-    global $smarty;
-    $name = "admin";
-    $pass = "111111";
-    $token = "xxxxxx"; //讓密碼不會直接被記憶,是隱藏的
-    if($name == $_POST['name'] and $pass == $_POST['pass']){
-        $_SESSION['admin'] = true;
+    global $db;
+    $_POST['uname'] = db_filter($_POST['uname'], '帳號');// 過濾變數
+    $_POST['pass'] = db_filter($_POST['pass'], '密碼');
+
+    $sql = "SELECT *
+            FROM `users`
+            WHERE `uname` = '{$_POST['uname']}'
+    ";
+    $result = $db->query($sql) or die($db->error() . $sql); //送資料出去執行
+    $row = $result->fetch_assoc() or redirect_header ("index.php?op=login_form" , '帳號輸入錯誤' , 3000);
+    
+     //取出的資料陣列，是以欄位順序為陣列索引,一次一筆
+     $row['uname'] = htmlspecialchars($row['uname']); //文字過濾成字串
+     $row['uid'] =  (int)$row['uid']; //數字過濾成整數
+     $row['kind'] =  (int)$row['kind']; //數字過濾成整數
+     $row['name'] = htmlspecialchars($row['name']); //文字過濾成字串
+     $row['tel'] = htmlspecialchars($row['tel']); //文字過濾成字串
+     $row['email'] = htmlspecialchars($row['email']); //文字過濾成字串
+     $row['pass'] = htmlspecialchars($row['pass']); //文字過濾成字串
+     $row['token'] = htmlspecialchars($row['token']); //文字過濾成字串
+    
+    if(password_verify($_POST['pass'], $row['pass'])){ //$_POST['pass']外傳得值, $row['pass']資料庫的值
+        //登入成功,↓將資料寫進會員資料中
+        $_SESSION['user']['uid'] = $row['uid'];
+        $_SESSION['user']['uname'] = $row['uname'];
+        $_SESSION['user']['name'] = $row['name'];
+        $_SESSION['user']['tel'] = $row['tel'];
+        $_SESSION['user']['email'] = $row['email'];
+        $_SESSION['user']['kind'] = $row['kind']; //$_SESSION['user']['kind'] 等於smarty的 $smarty.session.admin
+        
         $_POST['remember'] = isset($_POST['remember']) ? $_POST['remember'] : ""; //是否記住密碼的判斷式
-        if($_POST['remember']) { //如果選要記住
-            setcookie("name", $name, time()+ 3600 * 24 * 365); //time()+3600 * 24 * 365 記住多久,此為一年
-            setcookie("token", $token, time()+ 3600 * 24 * 365); 
+        if($_POST['remember']){//如果選要記住
+            setcookie("uname",$row['uname'], time()+ 3600 * 24 * 365); //time()+3600 * 24 * 365 記住多久,此為一年
+            setcookie("token", $row['token'], time()+ 3600 * 24 * 365); 
         }
         redirect_header ("index.php" , '登入成功' , 3000);         
-    } else {
+    } else{    //↓抓取資料失敗,值一律清空
+        $_SESSION['user']['uid'] = "";
+        $_SESSION['user']['uname'] = "";
+        $_SESSION['user']['name'] = "";
+        $_SESSION['user']['tel'] = "";
+        $_SESSION['user']['email'] = "";
+        $_SESSION['user']['kind'] = "";
         redirect_header ("index.php?op=login_form" , '登入失敗' , 3000); 
     }
     //print_r($_POST);die();  陣列也可用var_dump(內容顯示的比較多),但不能用echo
 }
 function logout() {
-    $_SESSION['admin']="";
-    setcookie("name", "" , time()- 3600 * 24 * 365); //登出後清除COOKIE
-    setcookie("token", "" , time()- 3600 * 24 * 365); //登出後清除COOKIE
+    $_SESSION['user']['uid'] = "";
+    $_SESSION['user']['uname'] = "";
+    $_SESSION['user']['name'] = "";
+    $_SESSION['user']['tel'] = "";
+    $_SESSION['user']['email'] = "";
+    $_SESSION['user']['kind'] = "";
+    setcookie("uname", "", time()- 3600 * 24 * 365); //登出後清除COOKIE
+    setcookie("token", "", time()- 3600 * 24 * 365);//登出後清除COOKIE
+    // print_r($_SESSION); die();
 }
-// #轉向函式
-// function redirect_header($url = "index.php" , $message = '訊息' , $time = 3000) {
-//     $_SESSION['redirect'] = true; //呼叫這個函式,表示真時,要轉頁
-//     $_SESSION['message'] = $message;
-//     $_SESSION['time'] = $time;
-//     header("location:{$url}"); // SESSION不會因轉頁,而消除紀錄,古前面用SESSION呼叫
-// }

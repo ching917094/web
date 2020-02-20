@@ -35,14 +35,47 @@ require_once _WEB_PATH.'/sqlConfig.php';
 #引入設定檔,引入所有function
 require_once _WEB_PATH . '/function.php';
 
-$_SESSION['admin'] = ($_SESSION['admin']) ? $_SESSION['admin'] : false ; // 登入用
-// 設定一個變數$_SESSION['admin(自訂的變數名稱)'] = SESSION變數判斷式→($_SESSION['admin']) ? $_SESSION['admin'] : false ; ?後為正確時指令 :後為錯誤時指令
+$_SESSION['user']['kind'] = isset($_SESSION['user']['kind']) ? $_SESSION['user']['kind'] : "" ; // 登入用
+// 設定一個變數$_SESSION['user']['kind''](自訂的變數名稱) = SESSION變數判斷式→($_SESSION['user']['kind']) ? $_SESSION['user']['kind'] : false ; ?後為正確時指令 :後為錯誤時指令
 
 #記住我COOKIE判斷式
-if(!$_SESSION['admin']) { //先判斷是否為管理員
+if($_SESSION['user']['kind'] === "") { //先判斷是否為管理員
     $_COOKIE['token'] = isset($_COOKIE['token']) ? $_COOKIE['token'] : "" ; //token是否正確的判斷式
-    $_COOKIE['name'] = isset($_COOKIE['name']) ? $_COOKIE['name'] : "" ; //name是否正確的判斷式
-    if($_COOKIE['name'] == "admin" and $_COOKIE['token'] == "xxxxxx")$_SESSION['admin'] = true; //↑如果name和token都正確時執行,登入正確的判斷式
+    $_COOKIE['uname'] = isset($_COOKIE['uname']) ? $_COOKIE['uname'] : "" ; //uname是否正確的判斷式
+    
+    $_COOKIE['uname'] = db_filter($_COOKIE['uname'], '');// 過濾變數,過濾變數不用必填故最後面用''即可
+    $_COOKIE['token'] = db_filter($_COOKIE['token'], '');
+    
+    if($_COOKIE['uname'] && $_COOKIE['token']){
+        $sql = "SELECT *
+            FROM `users`
+            WHERE `uname` = '{$_COOKIE['uname']}'
+    ";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        if($_COOKIE['token'] === $row['token']){
+            //取出的資料陣列，是以欄位順序為陣列索引,一次一筆
+            $row['uname'] = htmlspecialchars($row['uname']); //文字過濾成字串
+            $row['uid'] =  (int)$row['uid']; //數字過濾成整數
+            $row['kind'] =  (int)$row['kind']; //數字過濾成整數
+            $row['name'] = htmlspecialchars($row['name']); //文字過濾成字串
+            $row['tel'] = htmlspecialchars($row['tel']); //文字過濾成字串
+            $row['email'] = htmlspecialchars($row['email']); //文字過濾成字串
+            $row['pass'] = htmlspecialchars($row['pass']); //文字過濾成字串
+            $row['token'] = htmlspecialchars($row['token']); //文字過濾成字串
+
+            //登入成功,↓將資料寫進會員資料中
+            $_SESSION['user']['uid'] = $row['uid'];
+            $_SESSION['user']['uname'] = $row['uname'];
+            $_SESSION['user']['name'] = $row['name'];
+            $_SESSION['user']['tel'] = $row['tel'];
+            $_SESSION['user']['email'] = $row['email'];
+            $_SESSION['user']['kind'] = $row['kind']; //$_SESSION['user']['kind'] 等於smarty的 $smarty.session.user.kind
+        }
+    }
+    
+    // print_r($row);die();
+    
 }
 
 #轉向用,送幾個值過去,就要有幾段

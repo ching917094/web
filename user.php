@@ -11,7 +11,7 @@
 /* 引入檔頭，每支程都會引入 */
 require_once 'head.php';
 /* 管理員判斷式,不是管理員一律直接轉走 */ 
-if(!$_SESSION['admin'])redirect_header ("index.php" , '您沒有權限' , 3000); 
+if($_SESSION['user']['kind'] !== 1)redirect_header("index.php", '您沒有權限', 3000);
 
 /* 過濾變數，設定預設值 */
 $op = system_CleanVars($_REQUEST, 'op', 'op_list', 'string'); //REQUEST 包含全部請求碼
@@ -21,6 +21,11 @@ $uid = system_CleanVars($_REQUEST, 'uid', '', 'int');  // sn為序號,也可用i
 switch ($op){
     case "op_update" :
         $msg = op_update($uid);    
+        redirect_header("user.php", $msg, 3000);
+        exit;
+
+    case "op_delete" :
+        $msg = op_delete($uid);    
         redirect_header("user.php", $msg, 3000);
         exit;
 
@@ -69,6 +74,15 @@ function op_update($uid=""){
             ";    
     $db->query($sql) or die($db->error() . $sql);//執行上面的語法,如有錯誤將印出
     return "會員資料更新成功";
+}
+
+function op_delete($uid) {
+    global $db;
+    $sql="DELETE FROM `users`
+        WHERE `uid` = '{$uid}';
+    ";
+    $db->query($sql) or die($db->error() . $sql);
+    return "會員刪除成功";
 }
 
 function op_form($uid=""){ //參數打$uid=""代表可以不傳值,不傳為空,是新增一筆

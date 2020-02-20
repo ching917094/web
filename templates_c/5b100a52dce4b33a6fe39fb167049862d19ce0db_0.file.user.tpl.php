@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-19 09:46:21
+/* Smarty version 3.1.34-dev-7, created on 2020-02-20 03:44:56
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\user.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e4cf5dd51e170_33759602',
+  'unifunc' => 'content_5e4df2a8d92042_21093485',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5b100a52dce4b33a6fe39fb167049862d19ce0db' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\user.tpl',
-      1 => 1582101974,
+      1 => 1582166692,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e4cf5dd51e170_33759602 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e4df2a8d92042_21093485 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['op']->value == "op_list") {?> <table class="table table-striped table-bordered table-hover table-sm">
     <thead>
         <tr>
@@ -50,7 +50,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['row']->value) {
                 <td><?php if ($_smarty_tpl->tpl_vars['row']->value['kind']) {?><i class="fas fa-user-check"></i><?php }?></td>
                 <td>
                     <a href="user.php?op=op_form&uid=<?php echo $_smarty_tpl->tpl_vars['row']->value['uid'];?>
-"><i class="fas fa-edit"></i></a>
+"><i class="fas fa-edit"></i></a>&nbsp
+                    <a href="javascript:void(0)" onclick="op_delete(<?php echo $_smarty_tpl->tpl_vars['row']->value['uid'];?>
+);"><i class="far fa-trash-alt"></i></a>
                 </td> <!--↑編輯到選擇的那筆資料-->
             </tr>
         <?php
@@ -65,6 +67,33 @@ foreach ($_from as $_smarty_tpl->tpl_vars['row']->value) {
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>        
     </tbody>
 </table>
+<!-- sweetalert2 -->
+<link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.css">
+<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+>
+    function op_delete(uid) {
+        Swal.fire({
+            title: '您確定嗎?',
+            text: "您將無法還原!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '是的，刪除它!',
+            cancelButtonText: '取消'
+            }).then((result) => {
+            if (result.value) {
+                document.location.href="user.php?op=op_delete&uid=" + uid;                
+            }
+        })
+    }
+<?php echo '</script'; ?>
+>
 <?php }?>
 
 <?php if ($_smarty_tpl->tpl_vars['op']->value == "op_form") {?>

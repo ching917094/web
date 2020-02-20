@@ -10,7 +10,7 @@ echo "------------------ hash -----------------";
 echo "<br>";
 echo $hash;
 echo "<br>";
-if (password_verify($pwd, $hash)) { //用加密後的值判斷密碼,每次加密出來的值都不同
+if (password_verify($pwd, $hash)) { //用加密後的值判斷密碼,每次加密出來的值都不同,用來驗證
     echo "密碼正確(hash)";
 }
 echo "<br>";

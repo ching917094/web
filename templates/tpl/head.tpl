@@ -28,21 +28,27 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="index.php?op=contact_form"><{$a4}></a>
           </li>
-          <{if $smarty.session.admin}> <!--是管理員時顯示-->
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="user.php">管理員</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="index.php?op=logout">登出</a>
-          </li>              
-          <{else}> <!--不是管理員時顯示-->
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="index.php?op=login_form">登入</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="index.php?op=reg_form">註冊</a>
-          </li>
-          <{/if}>
+          <{if $smarty.session.user.kind === 1}>
+            <{* 管理員   *}>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="user.php">後台</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="index.php?op=logout">登出</a>
+            </li>
+          <{elseif $smarty.session.user.kind === 0}> 
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="index.php?op=logout">登出</a>
+            </li> 
+          <{else}>
+            <{* 未登入  *}>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="index.php?op=login_form">登入</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="index.php?op=reg_form">註冊</a>
+            </li>
+          <{/if}>        
         </ul>
       </div>
     </div>
