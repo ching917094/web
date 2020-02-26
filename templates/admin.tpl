@@ -27,7 +27,9 @@
             <div class="row">
                 <div class="col-sm-9">
                     <{if $WEB.file_name == "user.php"}>
-                        <{include file="tpl/user.tpl"}> <{*引入表格*}>
+                        <{include file="tpl/user.tpl"}> <{*引入會員管理表格*}>
+                    <{elseif $WEB.file_name == "prod.php"}>
+                        <{include file="tpl/prod.tpl"}> <{*引入商品管理表格*}>
                     <{/if}>
                 </div>
                 <div class="col-sm-3">
@@ -39,11 +41,19 @@
                                 <li class="list-group-item"> 
                                     <a href="index.php" class="btn-block">首頁</a>   
                                 </li>
-                                <a href="index.php?op=logout" class="list-group-item">
-                                    <li style="list-style-type:none">登出</li>
+                                <a href="user.php" class="list-group-item">
+                                    <li style="list-style-type:none">會員管理</li>
                                 </a>
+                                </li>
+                                <a href="prod.php" class="list-group-item">
+                                    <li style="list-style-type:none">商品管理</li>
+                                </a>
+                                </li>
                                 <a href="http://localhost/adminer/adminer.php" class="list-group-item" target="_blank">
                                     <li style="list-style-type:none">資料庫管理</li> <!--target="_blank"開新視窗-->
+                                </a>
+                                <a href="index.php?op=logout" class="list-group-item">
+                                    <li style="list-style-type:none">登出</li>
                                 </a>
                                 <!-- 首頁/登出 全區域可點的兩種寫法 -->
                             </ul>

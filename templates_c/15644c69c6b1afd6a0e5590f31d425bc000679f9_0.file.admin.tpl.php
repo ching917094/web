@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-19 06:41:31
+/* Smarty version 3.1.34-dev-7, created on 2020-02-26 03:34:02
   from 'D:\PHP\xampp\htdocs\web\templates\admin.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e4cca8be46197_79504768',
+  'unifunc' => 'content_5e55d91ad12472_06537677',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '15644c69c6b1afd6a0e5590f31d425bc000679f9' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\admin.tpl',
-      1 => 1582090773,
+      1 => 1582684429,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
     'file:tpl/redirect.tpl' => 1,
     'file:tpl/user.tpl' => 1,
+    'file:tpl/prod.tpl' => 1,
   ),
 ),false)) {
-function content_5e4cca8be46197_79504768 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e55d91ad12472_06537677 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -64,6 +65,8 @@ bootstrap/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU
                 <div class="col-sm-9">
                     <?php if ($_smarty_tpl->tpl_vars['WEB']->value['file_name'] == "user.php") {?>
                         <?php $_smarty_tpl->_subTemplateRender("file:tpl/user.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>                     <?php } elseif ($_smarty_tpl->tpl_vars['WEB']->value['file_name'] == "prod.php") {?>
+                        <?php $_smarty_tpl->_subTemplateRender("file:tpl/prod.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>                     <?php }?>
                 </div>
                 <div class="col-sm-3">
@@ -75,11 +78,19 @@ bootstrap/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU
                                 <li class="list-group-item"> 
                                     <a href="index.php" class="btn-block">首頁</a>   
                                 </li>
-                                <a href="index.php?op=logout" class="list-group-item">
-                                    <li style="list-style-type:none">登出</li>
+                                <a href="user.php" class="list-group-item">
+                                    <li style="list-style-type:none">會員管理</li>
                                 </a>
+                                </li>
+                                <a href="prod.php" class="list-group-item">
+                                    <li style="list-style-type:none">商品管理</li>
+                                </a>
+                                </li>
                                 <a href="http://localhost/adminer/adminer.php" class="list-group-item" target="_blank">
                                     <li style="list-style-type:none">資料庫管理</li> <!--target="_blank"開新視窗-->
+                                </a>
+                                <a href="index.php?op=logout" class="list-group-item">
+                                    <li style="list-style-type:none">登出</li>
                                 </a>
                                 <!-- 首頁/登出 全區域可點的兩種寫法 -->
                             </ul>
