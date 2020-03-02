@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-15 02:45:34
+/* Smarty version 3.1.34-dev-7, created on 2020-03-02 11:35:16
   from 'D:\PHP\xampp\htdocs\web\templates\theme.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e474d3e6c8ed6_53759188',
+  'unifunc' => 'content_5e5c7ef425cfd6_46011318',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4e5ac8bedde17635334320d7a2bf313c97e459aa' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\theme.tpl',
-      1 => 1581730674,
+      1 => 1583120103,
       2 => 'file',
     ),
   ),
@@ -29,7 +29,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:tpl/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5e474d3e6c8ed6_53759188 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e5c7ef425cfd6_46011318 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +40,8 @@ function content_5e474d3e6c8ed6_53759188 (Smarty_Internal_Template $_smarty_tpl)
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Creative - Start Bootstrap Theme</title>
+  <title><?php echo $_smarty_tpl->tpl_vars['WEB']->value['web_title'];?>
+</title>
 
   <!-- Font Awesome Icons -->
   <link href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
@@ -56,7 +57,7 @@ vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
   <link href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-css/creative.min.css" rel="stylesheet">
+css/creative.css" rel="stylesheet">
 
     <?php $_smarty_tpl->_subTemplateRender("file:tpl/head_js.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
@@ -88,7 +89,12 @@ css/creative.min.css" rel="stylesheet">
         <?php $_smarty_tpl->_subTemplateRender("file:tpl/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
     
-  
+<!-- Custom scripts for this template -->
+<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
+js/creative.min.js"><?php echo '</script'; ?>
+>
+
 </body>
 
 </html><?php }

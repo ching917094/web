@@ -42,18 +42,16 @@ switch ($op){
     
     default: //網址後面亂輸入的人會跑這,用來防止惡意攻擊
         $op = "op_list";
+        $mainSlides = getMenus("mainSlide",true);
+        $smarty->assign("mainSlides", $mainSlides);
         break;  //離開
 }
 
 /*---- 將變數送至樣版----*/
+$mainMenus = getMenus("mainMenu");
+$smarty->assign("mainMenus", $mainMenus);
 $smarty->assign("WEB", $WEB);
 $smarty->assign("op", $op);
-
-$smarty->assign("a0", "關於我們");
-$smarty->assign("a1", "服務項目");
-$smarty->assign("a2", "產品目錄");
-$smarty->assign("a3", "聯絡資訊");
-$smarty->assign("a4", "聯絡我們");
 
 /* ctrl+h取代 ctrl+f搜尋 */
 // print_r ($_COOKIE);die(); 用來檢查記住我的登入資料有沒有記錄到
@@ -63,6 +61,30 @@ $smarty->assign("a4", "聯絡我們");
 $smarty->display('theme.tpl');
 
 /*------函數區-----*/
+function getMenus($kind,$pic=false){
+    global $db;
+    
+    $sql = "SELECT *
+            FROM `kinds`
+            WHERE `kind`='{$kind}' and `enable` = '1'
+            ORDER BY `sort`
+    ";//die($sql);
+
+    $result = $db->query($sql) or die($db->error() . $sql);
+    $rows=[];//array();
+    while($row = $result->fetch_assoc()){ 
+        $row['sn'] = (int)$row['sn'];//分類
+        $row['title'] = htmlspecialchars($row['title']);//標題
+        $row['enable'] = (int)$row['enable'];//狀態 
+        $row['sn'] = (int)$row['sn'];//分類
+        $row['url'] = htmlspecialchars($row['url']);//網址
+        $row['target'] = (int)$row['target'];//外連
+        $row['pic'] = ($pic == true)? getFilesByKindColsnSort($kind,$row['sn']) :""; //顯示圖片連結
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 function contact_form() {
 
 }

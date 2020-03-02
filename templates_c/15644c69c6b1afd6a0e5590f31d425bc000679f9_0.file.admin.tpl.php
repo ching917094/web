@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-26 03:34:02
+/* Smarty version 3.1.34-dev-7, created on 2020-03-02 13:46:11
   from 'D:\PHP\xampp\htdocs\web\templates\admin.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e55d91ad12472_06537677',
+  'unifunc' => 'content_5e5c9da31e0503_58519605',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '15644c69c6b1afd6a0e5590f31d425bc000679f9' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\admin.tpl',
-      1 => 1582684429,
+      1 => 1583127894,
       2 => 'file',
     ),
   ),
@@ -21,9 +21,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:tpl/redirect.tpl' => 1,
     'file:tpl/user.tpl' => 1,
     'file:tpl/prod.tpl' => 1,
+    'file:tpl/kind.tpl' => 1,
+    'file:tpl/menu.tpl' => 1,
+    'file:tpl/slide.tpl' => 1,
   ),
 ),false)) {
-function content_5e55d91ad12472_06537677 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e5c9da31e0503_58519605 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -39,7 +42,8 @@ bootstrap/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9D
     <link href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
 vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <title>會員管理</title>
+    <title><?php echo $_smarty_tpl->tpl_vars['WEB']->value['web_title'];?>
+</title>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <?php echo '<script'; ?>
@@ -59,7 +63,8 @@ bootstrap/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU
 <body>
         <?php $_smarty_tpl->_subTemplateRender("file:tpl/redirect.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-    <h2 class="text-center mt-2">管理員後台</h2>
+    <h2 class="text-center mt-2"><?php echo $_smarty_tpl->tpl_vars['WEB']->value['web_title'];?>
+</h2>
         <div class="container">
             <div class="row">
                 <div class="col-sm-9">
@@ -67,6 +72,12 @@ bootstrap/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU
                         <?php $_smarty_tpl->_subTemplateRender("file:tpl/user.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>                     <?php } elseif ($_smarty_tpl->tpl_vars['WEB']->value['file_name'] == "prod.php") {?>
                         <?php $_smarty_tpl->_subTemplateRender("file:tpl/prod.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>                     <?php } elseif ($_smarty_tpl->tpl_vars['WEB']->value['file_name'] == "kind.php") {?>
+                        <?php $_smarty_tpl->_subTemplateRender("file:tpl/kind.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>                     <?php } elseif ($_smarty_tpl->tpl_vars['WEB']->value['file_name'] == "menu.php") {?>
+                        <?php $_smarty_tpl->_subTemplateRender("file:tpl/menu.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>                     <?php } elseif ($_smarty_tpl->tpl_vars['WEB']->value['file_name'] == "slide.php") {?>
+                        <?php $_smarty_tpl->_subTemplateRender("file:tpl/slide.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>                     <?php }?>
                 </div>
                 <div class="col-sm-3">
@@ -81,11 +92,18 @@ bootstrap/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU
                                 <a href="user.php" class="list-group-item">
                                     <li style="list-style-type:none">會員管理</li>
                                 </a>
-                                </li>
                                 <a href="prod.php" class="list-group-item">
                                     <li style="list-style-type:none">商品管理</li>
                                 </a>
-                                </li>
+                                <a href="kind.php" class="list-group-item">
+                                    <li style="list-style-type:none">類別管理</li>
+                                </a>
+                                <a href="menu.php" class="list-group-item">
+                                    <li style="list-style-type:none">選單管理</li>
+                                </a>
+                                <a href="slide.php" class="list-group-item">
+                                    <li style="list-style-type:none">輪播圖管理</li>
+                                </a>
                                 <a href="http://localhost/adminer/adminer.php" class="list-group-item" target="_blank">
                                     <li style="list-style-type:none">資料庫管理</li> <!--target="_blank"開新視窗-->
                                 </a>

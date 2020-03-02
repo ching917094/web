@@ -2,6 +2,7 @@
 <table class="table table-striped table-bordered table-hover table-sm">
     <thead>
         <tr>
+            <th scope="col" style="width:85px;">圖片</th>
             <th scope="col">標題</th>
             <th scope="col">分類</th>
             <th scope="col" class="text-right">價格</th>
@@ -15,12 +16,13 @@
     <tbody>
         <{foreach $rows as $row}>
             <tr>
-                <td><{$row.title}></td>
-                <td><{$row.kind_sn}></td>
-                <td class="text-right"><{$row.price}></td>
-                <td class="text-center"><{if $row.enable}><i class="fas fa-check"></i><{/if}></td>
-                <td class="text-center"><{$row.counter}></td>
-                <td class="text-center">
+                <td><img src="<{$row.prod}>" alt="<{$row.title}>" width=80></td>
+                <td class="align-middle"><{$row.title}></td>
+                <td class="align-middle"><{$row.kind_sn}></td>
+                <td class="text-right align-middle"><{$row.price}></td>
+                <td class="text-center align-middle"><{if $row.enable}><i class="fas fa-check"></i><{/if}></td>
+                <td class="text-center align-middle"><{$row.counter}></td>
+                <td class="text-center align-middle">
                     <a href="?op=op_form&sn=<{$row.sn}>"><i class="fas fa-edit"></i></a>&nbsp
                     <a href="javascript:void(0)" onclick="op_delete(<{$row.sn}>);"><i class="far fa-trash-alt"></i></a>
                 </td> <!--↑編輯到選擇的那筆資料-->
@@ -90,7 +92,7 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label>價格</label>
-                <input type="text" class="form-control" name="price" id="price" value="<{$row.price}>">
+                <input type="text" class="form-control text-right" name="price" id="price" value="<{$row.price}>">
             </div>
         </div>         
         <!--建立日期-->              
@@ -104,14 +106,14 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label>排序</label>
-                <input type="text" class="form-control" name="sort" id="sort" value="<{$row.sort}>">
+                <input type="text" class="form-control text-right" name="sort" id="sort" value="<{$row.sort}>">
             </div>
         </div> 
         <!--計數-->              
         <div class="col-sm-3">
             <div class="form-group">
                 <label>計數</label>
-                <input type="text" class="form-control" name="counter" id="counter" value="<{$row.counter}>">
+                <input type="text" class="form-control text-right" name="counter" id="counter" value="<{$row.counter}>">
             </div>
         </div> 
         <!--圖片上傳-->              
@@ -136,6 +138,15 @@
                 </div>
             </div>
         </div>
+        <!-- ckeditor -->
+        <script src="<{$xoAppUrl}>class/ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('content',{
+                height:500,
+                contentsCss: ['<{$xoImgUrl}>css/creative.css'] //引入前台樣板css
+            });
+        </script>
+        
         <div class="text-center pb-20">
             <input type="hidden" name="op" value="<{$row.op}>"> <!-- 會隨著你要新增還是修改,自動跑不同的op_xxx -->
             <input type="hidden" name="sn" value="<{$row.sn}>"> 

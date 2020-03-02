@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-20 03:44:56
+/* Smarty version 3.1.34-dev-7, created on 2020-03-02 11:08:54
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\user.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e4df2a8d92042_21093485',
+  'unifunc' => 'content_5e5c78c6888071_77064118',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5b100a52dce4b33a6fe39fb167049862d19ce0db' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\user.tpl',
-      1 => 1582166692,
+      1 => 1583116977,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e4df2a8d92042_21093485 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e5c78c6888071_77064118 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['op']->value == "op_list") {?> <table class="table table-striped table-bordered table-hover table-sm">
     <thead>
         <tr>
@@ -60,7 +60,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['row']->value) {
 } else {
 ?>
             <tr>
-                <td colspan="20">目前沒有資料</td> <!--colspan="?" ?為要顯示幾筆表單資料-->
+                <td colspan="6">目前沒有資料</td> <!--colspan="?" ?為要顯示幾筆表單資料-->
             </tr>
         <?php
 }

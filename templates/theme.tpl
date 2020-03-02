@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Creative - Start Bootstrap Theme</title>
+  <title><{$WEB.web_title}></title>
 
   <!-- Font Awesome Icons -->
   <link href="<{$xoImgUrl}>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
   <link href="<{$xoImgUrl}>vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="<{$xoImgUrl}>css/creative.min.css" rel="stylesheet">
+  <link href="<{$xoImgUrl}>css/creative.css" rel="stylesheet">
 
   <{* 引入head_js.tpl js連結 *}>
   <{include file="tpl/head_js.tpl"}>
@@ -55,7 +55,9 @@
     <{* 引入footer.tpl頁尾 *}>
     <{include file="tpl/footer.tpl"}>
     
-  
+<!-- Custom scripts for this template -->
+<script src="<{$xoImgUrl}>js/creative.min.js"></script>
+
 </body>
 
 </html>

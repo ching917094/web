@@ -25,7 +25,7 @@
             </tr>
         <{foreachelse}>
             <tr>
-                <td colspan="20">目前沒有資料</td> <!--colspan="?" ?為要顯示幾筆表單資料-->
+                <td colspan="6">目前沒有資料</td> <!--colspan="?" ?為要顯示幾筆表單資料-->
             </tr>
         <{/foreach}>        
     </tbody>

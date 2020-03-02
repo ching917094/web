@@ -26,7 +26,12 @@ switch ($op){
 
     case "op_delete" :
         $msg = op_delete($sn);    
-        redirect_header("user.php", $msg, 3000);
+        redirect_header("prod.php", $msg, 3000);
+        exit;
+    
+    case "op_update" :
+        $msg = op_insert($sn);
+        redirect_header("prod.php", $msg, 3000);
         exit;
 
     case "op_form" :
@@ -62,9 +67,21 @@ function op_insert($sn=""){
     $_POST['counter'] = db_filter($_POST['counter'], '');
     
     if($sn) {
-
+        $sql="UPDATE  `prods` SET
+        `kind_sn` = '{$_POST['kind_sn']}',
+        `title` = '{$_POST['title']}',
+        `content` = '{$_POST['content']}',
+        `price` = '{$_POST['price']}',
+        `enable` = '{$_POST['enable']}',
+        `date` = '{$_POST['date']}',
+        `sort` = '{$_POST['sort']}',
+        `counter` = '{$_POST['counter']}'
+        WHERE `sn` = '{$_POST['sn']}'    
+        ";
+        $db->query($sql) or die($db->error() . $sql);
+        $msg = "商品資料更新成功";
     } else {
-        $sql = "INSERT `prods`
+        $sql = "INSERT INTO `prods`
         (`kind_sn`,`title`,`content`,`price`,`enable`,`date`,`sort`,`counter`)
         VALUES
         ('{$_POST['kind_sn']}','{$_POST['title']}','{$_POST['content']}','{$_POST['price']}','{$_POST['enable']}','{$_POST['date']}','{$_POST['sort']}','{$_POST['counter']}')
@@ -74,8 +91,12 @@ function op_insert($sn=""){
         $msg = "商品資料新增成功";
     }   
     if($_FILES['prod']['name']) {
+        $kind = "prod";
+        #刪除舊圖
+        # 1.刪除實體檔案
+        # 2.刪除files資料表
+        delFilesByKindColsnSort($kind,$sn,1);
         if ($_FILES['prod']['error'] === UPLOAD_ERR_OK){
-            $kind = "prod";
             $sub_dir = "/".$kind;
             $sort = 1;
             #過濾變數
@@ -117,11 +138,68 @@ function op_insert($sn=""){
 
 function op_delete($sn) {
     global $db;
+    #刪除舊圖
+    # 1.刪除實體檔案
+    # 2.刪除files資料表
+    delFilesByKindColsnSort("prod",$sn,1);
+
+    #刪除商品資料表
     $sql="DELETE FROM `prods`
-        WHERE `sn` = '{$sn}';
+            WHERE `sn` = '{$sn}'
     ";
     $db->query($sql) or die($db->error() . $sql);
-    return "會員刪除成功";
+    return "商品資料刪除成功";
+}
+
+/*===========================
+用sn取得商品檔資料
+===========================*/
+function getProdsBySn($sn){
+    global $db;
+    $sql="SELECT *
+        FROM `prods`
+        WHERE `sn` = '{$sn}'
+    ";//die($sql);
+    
+    $result = $db->query($sql) or die($db->error() . $sql);
+    $row = $result->fetch_assoc();
+    $row['prod'] = getFilesByKindColsnSort("prod",$sn); //取得圖片
+    return $row;
+
+}
+
+/*===========================
+取得商品檔類別選項
+===========================*/
+function getProdsOptions($kind){
+    global $db;
+    $sql="SELECT `sn`,`title`
+        FROM `kinds`
+        WHERE `kind` = '{$kind}' AND `enable` = '1'
+        ORDER BY `sort`  
+    ";
+    $result = $db->query($sql) or die($db->error() . $sql);
+    $rows=[];//array();
+    while($row = $result->fetch_assoc()){    
+        $row['sn'] = (int)$row['sn'];//分類
+        $row['title'] = htmlspecialchars($row['title']);//標題
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+/*================================
+用取得商品數量的最大值
+================================*/
+function getProdMaxSort(){
+    global $db;
+    $sql = "SELECT count(*)+1 as count
+            FROM `prods`
+    ";//die($sql);
+
+    $result = $db->query($sql) or die($db->error() . $sql);
+    $row = $result->fetch_assoc();
+    return $row['count'];
 }
 
 function op_form($sn=""){ //參數打$sn=""代表可以不傳值,不傳為空,是新增一筆
@@ -144,14 +222,17 @@ function op_form($sn=""){ //參數打$sn=""代表可以不傳值,不傳為空,�
     /* sn kind_sn title content	price enable date sort counter */
     $row['sn'] = isset($row['sn']) ? $row['sn'] : "";
     $row['kind_sn'] = isset($row['kind_sn']) ? $row['kind_sn'] : "1"; // 類別故寫死
+    $row['kind_sn_options'] = getProdsOptions("prod");
+
     $row['title'] = isset($row['title']) ? $row['title'] : "";
     $row['content'] = isset($row['content']) ? $row['content'] : "";
     $row['price'] = isset($row['price']) ? $row['price'] : "";
     $row['enable'] = isset($row['enable']) ? $row['enable'] : "1"; // 狀態預設給1,先啟用
-    $row['date'] = isset($row['date']) ? date("Y-m-d H:i:s",strtotime($row['date'])) : date("Y-m-d H:i:s",strtotime("now")); // 日期
-    $row['sort'] = isset($row['sort']) ? $row['sort'] : ""; // 排序
+    $row['date'] = isset($row['date']) ? $row['date'] : strtotime("now");
+    $row['date'] = date("Y-m-d H:i:s",$row['date']); // 日期
+    $row['sort'] = isset($row['sort']) ? $row['sort'] : getProdsMaxSort(); // 排序
     $row['counter'] = isset($row['counter']) ? $row['counter'] : ""; // 計數器,可以客戶要求先填入初始值
-
+    $row['prod'] = isset($row['prod']) ? $row['prod'] : "";  //圖片預設值
     $smarty->assign("row",$row);//將抓到的變數送到smarty樣板裡面
 }
 #連結後臺資料庫
@@ -163,31 +244,17 @@ function op_list(){
     $rows = []; //陣列
     //用迴圈來撈後台的資料
     while($row =  $result->fetch_assoc()) { //取出的資料陣列，是以欄位順序為陣列索引,一次一筆
+        $row['sn'] = (int)$row['sn'];//分類
         $row['title'] = htmlspecialchars($row['title']); //文字過濾成字串 標題
         $row['kind_sn'] =  (int)$row['kind_sn']; //數字過濾成整數 分類
         $row['price'] =  (int)$row['price']; //數字過濾成整數 價格
         $row['enable'] =  (int)$row['enable']; //數字過濾成整數 狀態
         $row['counter'] =  (int)$row['counter']; //數字過濾成整數 計數
+        $row['prod'] = getFilesByKindColsnSort("prod",$row['sn']); //顯示圖片
 
         $rows[] = $row; //二維陣列
     }
     // print_r($rows);die();
     $smarty->assign("rows",$rows); //將抓到的變數送到smarty樣板裡面
 }
-function getFilesByKindColsnSort($kind,$col_sn,$sort=1,$url=true){
-    global $db; 
-    $sql="SELECT *
-        FROM `files`
-        WHERE `kind` = '{$kind}' AND `col_sn` = '{$col_sn}' AND `sort` = '{$sort}'
-    ";     
-    $result = $db->query($sql) or die($db->error() . $sql);
-    $row = $result->fetch_assoc();
-    if($url) {
-        $file_name = _WEB_URL . "/uploads" . $row['sub_dir'] . "/" .$row['name']; // 網路上的路徑
-    } else {
-        $file_name = _WEB_PATH . "/uploads" . $row['sub_dir'] . "/" .$row['name']; // 實體路徑
-    }
-    return $file_name;
-}
-
 /* ctrl+h取代 ctrl+f搜尋 */

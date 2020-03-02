@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-02-26 16:52:35
+/* Smarty version 3.1.34-dev-7, created on 2020-03-02 16:35:19
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\prod.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e5631d3e94211_17886080',
+  'unifunc' => 'content_5e5cc547c13787_13919968',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0739995341bfa933d077e829f93084f673bb6752' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\prod.tpl',
-      1 => 1582707152,
+      1 => 1583137959,
       2 => 'file',
     ),
   ),
@@ -20,10 +20,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e5631d3e94211_17886080 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e5cc547c13787_13919968 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['op']->value == "op_list") {?> <table class="table table-striped table-bordered table-hover table-sm">
     <thead>
         <tr>
+            <th scope="col" style="width:85px;">圖片</th>
             <th scope="col">標題</th>
             <th scope="col">分類</th>
             <th scope="col" class="text-right">價格</th>
@@ -41,16 +42,19 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['row']->value) {
 ?>
             <tr>
-                <td><?php echo $_smarty_tpl->tpl_vars['row']->value['title'];?>
+                <td><img src="<?php echo $_smarty_tpl->tpl_vars['row']->value['prod'];?>
+" alt="<?php echo $_smarty_tpl->tpl_vars['row']->value['title'];?>
+" width=80></td>
+                <td class="align-middle"><?php echo $_smarty_tpl->tpl_vars['row']->value['title'];?>
 </td>
-                <td><?php echo $_smarty_tpl->tpl_vars['row']->value['kind_sn'];?>
+                <td class="align-middle"><?php echo $_smarty_tpl->tpl_vars['row']->value['kind_sn'];?>
 </td>
-                <td class="text-right"><?php echo $_smarty_tpl->tpl_vars['row']->value['price'];?>
+                <td class="text-right align-middle"><?php echo $_smarty_tpl->tpl_vars['row']->value['price'];?>
 </td>
-                <td class="text-center"><?php if ($_smarty_tpl->tpl_vars['row']->value['enable']) {?><i class="fas fa-check"></i><?php }?></td>
-                <td class="text-center"><?php echo $_smarty_tpl->tpl_vars['row']->value['counter'];?>
+                <td class="text-center align-middle"><?php if ($_smarty_tpl->tpl_vars['row']->value['enable']) {?><i class="fas fa-check"></i><?php }?></td>
+                <td class="text-center align-middle"><?php echo $_smarty_tpl->tpl_vars['row']->value['counter'];?>
 </td>
-                <td class="text-center">
+                <td class="text-center align-middle">
                     <a href="?op=op_form&sn=<?php echo $_smarty_tpl->tpl_vars['row']->value['sn'];?>
 "><i class="fas fa-edit"></i></a>&nbsp
                     <a href="javascript:void(0)" onclick="op_delete(<?php echo $_smarty_tpl->tpl_vars['row']->value['sn'];?>
@@ -135,7 +139,7 @@ class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
         <div class="col-sm-3">
             <div class="form-group">
                 <label>價格</label>
-                <input type="text" class="form-control" name="price" id="price" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['price'];?>
+                <input type="text" class="form-control text-right" name="price" id="price" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['price'];?>
 ">
             </div>
         </div>         
@@ -151,7 +155,7 @@ class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
         <div class="col-sm-3">
             <div class="form-group">
                 <label>排序</label>
-                <input type="text" class="form-control" name="sort" id="sort" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['sort'];?>
+                <input type="text" class="form-control text-right" name="sort" id="sort" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['sort'];?>
 ">
             </div>
         </div> 
@@ -159,7 +163,7 @@ class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
         <div class="col-sm-3">
             <div class="form-group">
                 <label>計數</label>
-                <input type="text" class="form-control" name="counter" id="counter" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['counter'];?>
+                <input type="text" class="form-control text-right" name="counter" id="counter" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['counter'];?>
 ">
             </div>
         </div> 
@@ -188,6 +192,21 @@ class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
                 </div>
             </div>
         </div>
+        <!-- ckeditor -->
+        <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/ckeditor/ckeditor.js"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
+>
+            CKEDITOR.replace('content',{
+                height:500,
+                contentsCss: ['<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
+css/creative.css'] //引入前台樣板css
+            });
+        <?php echo '</script'; ?>
+>
+        
         <div class="text-center pb-20">
             <input type="hidden" name="op" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['op'];?>
 "> <!-- 會隨著你要新增還是修改,自動跑不同的op_xxx -->
