@@ -26,17 +26,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-9">
-                    <{if $WEB.file_name == "user.php"}>
-                        <{include file="tpl/user.tpl"}> <{*引入會員管理表格*}>
-                    <{elseif $WEB.file_name == "prod.php"}>
-                        <{include file="tpl/prod.tpl"}> <{*引入商品管理表格*}>
-                    <{elseif  $WEB.file_name == "kind.php"}>
-                        <{include file="tpl/kind.tpl"}> <{*引入類別管理表格*}>
-                    <{elseif  $WEB.file_name == "menu.php"}>
-                        <{include file="tpl/menu.tpl"}> <{*引入選單管理表格*}>
-                    <{elseif  $WEB.file_name == "slide.php"}>
-                        <{include file="tpl/slide.tpl"}> <{*引入輪播圖管理表格*}>
-                    <{/if}>
+                    
+                <{if $WEB.file_name == "user.php"}>
+                    <{include file="tpl/user.tpl"}> <{*引入會員管理表格*}>
+                <{elseif $WEB.file_name == "prod.php"}>
+                    <{include file="tpl/prod.tpl"}> <{*引入商品管理表格*}>
+                <{elseif  $WEB.file_name == "kind.php"}>
+                    <{include file="tpl/kind.tpl"}> <{*引入類別管理表格*}>
+                <{elseif  $WEB.file_name == "menu.php"}>
+                    <{include file="tpl/menu.tpl"}> <{*引入選單管理表格*}>
+                <{elseif  $WEB.file_name == "slide.php"}>
+                    <{include file="tpl/slide.tpl"}> <{*引入輪播圖管理表格*}>
+                <{/if}>
                 </div>
                 <div class="col-sm-3">
                         <div class="card" style="width: 18rem;">

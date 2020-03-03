@@ -8,7 +8,9 @@ if($_SESSION['user']['kind'] !== 1)redirect_header("index.php", '您沒有權限
 $op = system_CleanVars($_REQUEST, 'op', 'op_list', 'string');
 $sn = system_CleanVars($_REQUEST, 'sn', '', 'int');
 $kind = system_CleanVars($_REQUEST, 'kind', 'mainMenu', 'string');
-$kind = "mainMenu";
+
+$kinds = ["mainMenu" , "cartMenu"];
+$kind = (in_array($kind, $kinds)) ? $kind : "mainMenu" ; // 保護資安
 // echo $op;die();
 
 /* 程式流程 */

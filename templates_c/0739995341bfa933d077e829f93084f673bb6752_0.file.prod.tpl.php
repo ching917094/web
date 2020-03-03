@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-03-02 16:35:19
+/* Smarty version 3.1.34-dev-7, created on 2020-03-03 09:56:55
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\prod.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e5cc547c13787_13919968',
+  'unifunc' => 'content_5e5db96713bbf2_00682355',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0739995341bfa933d077e829f93084f673bb6752' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\prod.tpl',
-      1 => 1583137959,
+      1 => 1583200530,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e5cc547c13787_13919968 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e5db96713bbf2_00682355 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['op']->value == "op_list") {?> <table class="table table-striped table-bordered table-hover table-sm">
     <thead>
         <tr>
@@ -192,7 +192,7 @@ class/sweetalert2/sweetalert2.min.js"><?php echo '</script'; ?>
                 </div>
             </div>
         </div>
-        <!-- ckeditor -->
+        <!-- 調用ckeditor -->
         <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
 class/ckeditor/ckeditor.js"><?php echo '</script'; ?>
@@ -200,9 +200,12 @@ class/ckeditor/ckeditor.js"><?php echo '</script'; ?>
         <?php echo '<script'; ?>
 >
             CKEDITOR.replace('content',{
-                height:500,
+                height:500,//高度
                 contentsCss: ['<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-css/creative.css'] //引入前台樣板css
+css/creative.css'],//前台樣板css
+                removeDialogTabs: 'image:Link',//取消連結 //link:target;link:advanced;image:advanced
+                filebrowserBrowseUrl: '<?php echo $_smarty_tpl->tpl_vars['xoAppUrl']->value;?>
+class/elfinder.php?type=image'//呼叫elfinder.php
             });
         <?php echo '</script'; ?>
 >
