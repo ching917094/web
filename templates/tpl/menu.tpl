@@ -2,8 +2,9 @@
     <div class="row mb-3 ml-1">
         <div class="cols-sm-4">
             <select name="kind" id="kind" class="form-control" onchange="location.href='?kind='+this.value">
-                <option value="mainMenu" <{if $kind == "mainMenu"}> selected="" <{/if}> >主選單</option>
-                <option value="cartMenu" <{if $kind == "cartMenu"}> selected="" <{/if}> >購物車選單</option>
+                <{foreach $kinds as $row}>
+                <option value="<{$row.value}>" <{if $kinds == $row.value}> selected="" <{/if}> ><{$row.title}></option>
+                <{/foreach}>
             </select>
         </div>
     </div>

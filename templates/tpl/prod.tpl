@@ -18,7 +18,7 @@
             <tr>
                 <td><img src="<{$row.prod}>" alt="<{$row.title}>" width=80></td>
                 <td class="align-middle"><{$row.title}></td>
-                <td class="align-middle"><{$row.kind_sn}></td>
+                <td class="align-middle"><{$row.kinds_title}></td>
                 <td class="text-right align-middle"><{$row.price}></td>
                 <td class="text-center align-middle"><{if $row.enable}><i class="fas fa-check"></i><{/if}></td>
                 <td class="text-center align-middle"><{$row.counter}></td>
@@ -34,6 +34,7 @@
         <{/foreach}>        
     </tbody>
 </table>
+<{$bar}>
 <!-- sweetalert2 -->
 <link rel="stylesheet" href="<{$xoAppUrl}>class/sweetalert2/sweetalert2.min.css">
 <script src="<{$xoAppUrl}>class/sweetalert2/sweetalert2.min.js"></script>
@@ -50,7 +51,7 @@
             cancelButtonText: '取消'
             }).then((result) => {
             if (result.value) {
-                document.location.href="user.php?op=op_delete&sn=" + sn;                
+                document.location.href="prod.php?op=op_delete&sn=" + sn;                
             }
         })
     }
@@ -75,9 +76,13 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label>分類</label>
-                <input type="text" class="form-control" name="kind_sn" id="kind_sn" value="<{$row.kind_sn}>">
+                <select name="kind_sn" id="kind_sn" class="form-control">
+                    <{foreach $row.kind_sn_options as $option}>
+                        <option value="<{$option.sn}>" <{if $option.sn == $row.kind_sn}>selected<{/if}>><{$option.title}></option>
+                    <{/foreach}>
+                </select>
             </div>
-        </div>   
+        </div>
         <!-- 商品狀態 -->
         <div class="col-sm-4">
             <div class="form-group">

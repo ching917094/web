@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-03-03 11:21:40
+/* Smarty version 3.1.34-dev-7, created on 2020-03-04 15:42:15
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\menu.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e5dcd446ab4d6_85454007',
+  'unifunc' => 'content_5e5f5bd77f9814_86327627',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'db0c0a2a86309d4346a3ef53a58274721bc7f1ba' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\menu.tpl',
-      1 => 1583205562,
+      1 => 1583307685,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,23 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e5dcd446ab4d6_85454007 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e5f5bd77f9814_86327627 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['op']->value == "op_list") {?>
     <div class="row mb-3 ml-1">
         <div class="cols-sm-4">
             <select name="kind" id="kind" class="form-control" onchange="location.href='?kind='+this.value">
-                <option value="mainMenu" <?php if ($_smarty_tpl->tpl_vars['kind']->value == "mainMenu") {?> selected="" <?php }?> >主選單</option>
-                <option value="cartMenu" <?php if ($_smarty_tpl->tpl_vars['kind']->value == "cartMenu") {?> selected="" <?php }?> >購物車選單</option>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['kinds']->value, 'row');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['row']->value) {
+?>
+                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value['value'];?>
+" <?php if ($_smarty_tpl->tpl_vars['kinds']->value == $_smarty_tpl->tpl_vars['row']->value['value']) {?> selected="" <?php }?> ><?php echo $_smarty_tpl->tpl_vars['row']->value['title'];?>
+</option>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             </select>
         </div>
     </div>
