@@ -37,6 +37,8 @@
                     <{include file="tpl/menu.tpl"}> <{*引入選單管理表格*}>
                 <{elseif  $WEB.file_name == "slide.php"}>
                     <{include file="tpl/slide.tpl"}> <{*引入輪播圖管理表格*}>
+                <{elseif  $WEB.file_name == "contact.php"}>
+                    <{include file="tpl/contact.tpl"}> <{*引入聯絡我們管理表格*}>
                 <{/if}>
                 </div>
                 <div class="col-sm-3">
@@ -59,6 +61,9 @@
                                 </a>
                                 <a href="menu.php" class="list-group-item">
                                     <li style="list-style-type:none">選單管理</li>
+                                </a>
+                                <a href="contact.php" class="list-group-item">
+                                    <li style="list-style-type:none">聯絡我們管理</li>
                                 </a>
                                 <a href="slide.php" class="list-group-item">
                                     <li style="list-style-type:none">輪播圖管理</li>

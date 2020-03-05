@@ -18,8 +18,10 @@ $kinds[] = array (
     "value" => "cartMenu" ,
     "title" => "購物車選單"
 );
+
 $smarty->assign("kinds", $kinds);
-// $kind = (in_array($kind, $kinds)) ? $kind : "mainMenu" ; // 保護資安防呆
+#防呆
+$kind = (in_array($kind, array_keys($kinds))) ? $kind : "mainMenu"; // 保護資安防呆
 // echo $op;die();
 
 /* 程式流程 */
