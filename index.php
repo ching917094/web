@@ -47,6 +47,7 @@ switch ($op){
 
     default: //網址後面亂輸入的人會跑這,用來防止惡意攻擊
         $op = "op_list";
+        $_SESSION['returnUrl'] = getCurrentUrl();
         $mainSlides = getMenus("mainSlide",true);
         $smarty->assign("mainSlides", $mainSlides);
         break;  //離開

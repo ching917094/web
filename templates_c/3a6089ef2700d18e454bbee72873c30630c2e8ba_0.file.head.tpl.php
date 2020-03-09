@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-03-02 13:21:41
+/* Smarty version 3.1.34-dev-7, created on 2020-03-09 13:22:50
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\head.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e5c97e5c2eb72_25182682',
+  'unifunc' => 'content_5e65d2aae06592_17731424',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3a6089ef2700d18e454bbee72873c30630c2e8ba' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\head.tpl',
-      1 => 1583126489,
+      1 => 1583731363,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e5c97e5c2eb72_25182682 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e65d2aae06592_17731424 (Smarty_Internal_Template $_smarty_tpl) {
 ?>  <!-- Navigation -->
   <!-- <style>
     #mainNav {
@@ -49,8 +49,17 @@ foreach ($_from as $_smarty_tpl->tpl_vars['mainMenu']->value) {
           <?php
 }
 }
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>        
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>   
           
+            
+          <?php if ($_SESSION['cartAmount'] && $_smarty_tpl->tpl_vars['op']->value != "order_form") {?>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="cart.php?op=order_form">
+                <i class="fas fa-cart-plus"></i> 
+              </a>
+            </li>
+          <?php }?>
+
           <?php if ($_SESSION['user']['kind'] === 1) {?>
                         <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="user.php">後台</a>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-03-04 14:26:48
+/* Smarty version 3.1.34-dev-7, created on 2020-03-09 13:11:18
   from 'D:\PHP\xampp\htdocs\web\templates\theme.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e5f4a28170cc8_47349765',
+  'unifunc' => 'content_5e65cff6ccf4b5_63607007',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4e5ac8bedde17635334320d7a2bf313c97e459aa' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\theme.tpl',
-      1 => 1583303119,
+      1 => 1583730637,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:tpl/footer.tpl' => 1,
   ),
 ),false)) {
-function content_5e5f4a28170cc8_47349765 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5e65cff6ccf4b5_63607007 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +80,7 @@ css/creative.css" rel="stylesheet">
         <?php $_smarty_tpl->_subTemplateRender("file:tpl/footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-        <?php if ($_SESSION['cartAmount']) {?>
+        <?php if ($_SESSION['cartAmount'] && $_smarty_tpl->tpl_vars['op']->value != "order_form") {?>
       <style>
         .fab-fixed-wrap .fab {
           display: block;
