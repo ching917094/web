@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-03-02 15:28:31
+/* Smarty version 3.1.34-dev-7, created on 2020-03-10 10:41:28
   from 'D:\PHP\xampp\htdocs\web\templates\tpl\body.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5e5cb59f14dd16_17622754',
+  'unifunc' => 'content_5e66fe5823f2a1_70577087',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9a3257533772a5e9ca6552232a3ac1cee19e76fe' => 
     array (
       0 => 'D:\\PHP\\xampp\\htdocs\\web\\templates\\tpl\\body.tpl',
-      1 => 1583134107,
+      1 => 1583808044,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e5cb59f14dd16_17622754 (Smarty_Internal_Template $_smarty_tpl) {
-if ($_smarty_tpl->tpl_vars['mainSlides']->value[0]['pic']) {?>
+function content_5e66fe5823f2a1_70577087 (Smarty_Internal_Template $_smarty_tpl) {
+if ($_smarty_tpl->tpl_vars['mainSlides']->value) {?>
 <!-- 輪播圖 -->
 <style>
   .carousel-item {
@@ -43,7 +43,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['index']->value => $_smarty_tpl->tpl_vars['mainSlide']->value) {
 ?>
         <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" <?php if ($_smarty_tpl->tpl_vars['index']->value == "0") {?> class="active" <?php }?> ></li>
+" <?php if ($_smarty_tpl->tpl_vars['index']->value == '0') {?>class="active" <?php }?> ></li>
       <?php
 }
 }
@@ -56,7 +56,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['index']->value => $_smarty_tpl->tpl_vars['mainSlide']->value) {
 ?>
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item <?php if ($_smarty_tpl->tpl_vars['index']->value == "0") {?> active <?php }?> " style="background-image: url('<?php echo $_smarty_tpl->tpl_vars['mainSlide']->value['pic'];?>
+        <div class="carousel-item <?php if ($_smarty_tpl->tpl_vars['index']->value == '0') {?>active <?php }?>" style="background-image: url('<?php echo $_smarty_tpl->tpl_vars['mainSlide']->value['pic'];?>
 ')">
           <div class="carousel-caption d-none d-md-block">
             <h2 class="display-4"><?php echo $_smarty_tpl->tpl_vars['mainSlide']->value['title'];?>
@@ -67,7 +67,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['index']->value => $_smarty_tpl->tpl_v
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-      
+    </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -137,100 +137,37 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       <section id="portfolio">
         <div class="container-fluid p-0">
           <div class="row no-gutters">
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/fullsize/1.jpg">
-                <img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/thumbnails/1.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
+            <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['prods']->value, 'prod');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['prod']->value) {
+?>
+              <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="<?php echo $_smarty_tpl->tpl_vars['prod']->value['prod'];?>
+">
+                  <img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['prod']->value['prod'];?>
+" alt="<?php echo $_smarty_tpl->tpl_vars['prod']->value['title'];?>
+">
+                  <div class="portfolio-box-caption">
+                    <div class="project-category text-white-50">
+                      <?php echo $_smarty_tpl->tpl_vars['prod']->value['kinds_title'];?>
+
+                    </div>
+                    <div class="project-name">
+                      <?php echo $_smarty_tpl->tpl_vars['prod']->value['title'];?>
+
+                    </div>
                   </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/fullsize/2.jpg">
-                <img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/thumbnails/2.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/fullsize/3.jpg">
-                <img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/thumbnails/3.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/fullsize/4.jpg">
-                <img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/thumbnails/4.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/fullsize/5.jpg">
-                <img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/thumbnails/5.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/fullsize/6.jpg">
-                <img class="img-fluid" src="<?php echo $_smarty_tpl->tpl_vars['xoImgUrl']->value;?>
-img/portfolio/thumbnails/6.jpg" alt="">
-                <div class="portfolio-box-caption p-3">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
+                </a>
+              </div>
+            <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+            
           </div>
         </div>
       </section>
-    
       <!-- Call to Action Section -->
       <section class="page-section bg-dark text-white">
         <div class="container text-center">

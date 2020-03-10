@@ -1,6 +1,6 @@
 <?php
 require_once 'head.php';
- 
+
 /* 過濾變數，設定預設值 */
 $op = system_CleanVars($_REQUEST, 'op', 'op_list', 'string');
 $sn = system_CleanVars($_REQUEST, 'sn', '', 'int');
@@ -31,7 +31,7 @@ switch ($op){
 	case "order_form" :
     $msg = order_form($sn);
     break;  
-  
+    		  
   default:
     $op = "op_list";
     $_SESSION['returnUrl'] = getCurrentUrl();
@@ -45,7 +45,7 @@ $smarty->assign("mainMenus", $mainMenus);
 
 $smarty->assign("WEB", $WEB);
 $smarty->assign("op", $op);
-
+   
 /*---- 程式結尾-----*/
 $smarty->display('theme.tpl');
 
@@ -135,7 +135,7 @@ function order_insert($sn=""){
   $_POST['uid'] = db_filter($_POST['uid'], '');
   $_POST['date'] = strtotime("now");
   $_POST['op'] = db_filter($_POST['op'], '');//類別
-
+  
   if($sn){
 
     $sql="UPDATE  `orders_main` SET
@@ -203,10 +203,16 @@ function order_insert($sn=""){
                 WHERE `sn` = '{$sn}'  
   ";
   $db->query($sql) or die($db->error() . $sql);
+  
   if($_POST['op'] == "order_insert"){
-    $token = "ysoi2O8C2wEjFkqnRa3VCZoLg2zQvKqn41BacDogbjr";
-    send_notify_curl("您訂單編號 {$sn} 號,
-                      合計金額:{$Total}元", $token);
+
+    $lineId = "SFEbsJ00P8k67DA4TI19AUNDRsxofmjNWUEnmjRNVAa";
+
+    send_notify_curl("
+      您有一張訂單-{$sn}
+      合計金額：{$Total} 元
+    ", $lineId);
+
     unset($_SESSION['cart']);
     unset($_SESSION['cartAmount']);
   }
@@ -324,29 +330,28 @@ function op_list(){
 
 }
 
-$token = "ysoi2O8C2wEjFkqnRa3VCZoLg2zQvKqn41BacDogbjr";
 function send_notify_curl($message, $token) {
 	$curl = curl_init();
 	curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://notify-api.line.me/api/notify",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => http_build_query(array("message" => $message),'','&'),
-        CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer $token",
-            "Content-Type: application/x-www-form-urlencoded"
-        ),
+	  CURLOPT_URL => "https://notify-api.line.me/api/notify",
+	  CURLOPT_RETURNTRANSFER => true,
+	  CURLOPT_ENCODING => "",
+	  CURLOPT_MAXREDIRS => 10,
+	  CURLOPT_TIMEOUT => 30,
+	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	  CURLOPT_CUSTOMREQUEST => "POST",
+	  CURLOPT_POSTFIELDS => http_build_query(array("message" => $message),'','&'),
+	  CURLOPT_HTTPHEADER => array(
+		  "Authorization: Bearer $token",
+		  "Content-Type: application/x-www-form-urlencoded"
+	  ),
 	));
 	$response = curl_exec($curl);
 	$err = curl_error($curl);
 	curl_close($curl);
 	if ($err) {
-	    return "cURL Error #:" . $err;
+	  return "cURL Error #:" . $err;
 	} else {
-	    return $response;
+	  return $response;
 	}
 }

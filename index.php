@@ -15,6 +15,10 @@ switch ($op){
     case "ok" :
         $msg = ok();
         break; 
+
+    case "checkUname" :
+        echo json_encode(checkUname());
+        exit;
         
     case "login" :  //登入用
         $msg = login();
@@ -50,6 +54,8 @@ switch ($op){
         $_SESSION['returnUrl'] = getCurrentUrl();
         $mainSlides = getMenus("mainSlide",true);
         $smarty->assign("mainSlides", $mainSlides);
+        op_list();
+        # 取得商品資料(含圖)
         break;  //離開
 }
 
@@ -67,9 +73,63 @@ $smarty->assign("op", $op);
 $smarty->display('theme.tpl');
 
 /*------函數區-----*/
+/*####################################################
+AJAX 檢查帳號是否重覆
+驗證不過 => false ， 驗證通過 => true
+####################################################*/
+function checkUname() {
+    global $db;
+    $uname = system_CleanVars($_REQUEST, 'uname', '', 'string');
+
+    if(check_uname($uname)){
+        return false;//帳號有人使用，驗證不過
+    }
+    return true;
+}
+
+/*=======================
+檢查帳號是否有人使用
+有人使用 傳回 true
+無人使用 傳回 false
+=======================*/
+function check_uname($uname){
+    global $db;
+    $sql="SELECT count(*) as count
+        FROM `users`
+        WHERE `uname`='{$uname}'
+    ";    
+    $result = $db->query($sql) or die($db->error() . $sql);
+    $row = $result->fetch_assoc();
+
+    if($row['count'])return true;
+    return false;  
+}
+
+function op_list(){
+    global $db,$smarty;
+    
+    $sql = "SELECT a.*,b.title as kinds_title
+            FROM `prods` as a
+            LEFT JOIN `kinds` as b on a.kind_sn=b.sn
+            WHERE a.`enable`='1'
+            ORDER BY a.`date` desc
+            LIMIT 6;
+    ";//die($sql);
+
+    $result = $db->query($sql) or die($db->error() . $sql);
+    $rows=[];//array();
+    while($row = $result->fetch_assoc()){    
+        $row['sn'] = (int)$row['sn'];//分類
+        $row['title'] = htmlspecialchars($row['title']);//標題 
+        $row['prod'] = getFilesByKindColsnSort("prod",$row['sn']);
+        $row['kinds_title'] = htmlspecialchars($row['kinds_title']);//標題
+        $rows[] = $row;
+    }
+    $smarty->assign("prods",$rows); 
+}
+
 function contact_insert() {
     global $db;
-    
     $_POST['name'] = db_filter($_POST['name'], 'name');
     $_POST['tel'] = db_filter($_POST['tel'], 'tel');
     $_POST['email'] = db_filter($_POST['email'], 'email');
@@ -114,6 +174,11 @@ function reg() {
         redirect_header("index.php?op=reg_form","密碼不一致");
         exit;
     }
+    #檢查帳號是否重覆
+    if(check_uname($_POST['uname'])){
+        redirect_header("index.php?op=reg_form","帳號已有人使用");
+        exit;
+    }
     $_POST['pass']  = password_hash($_POST['pass'], PASSWORD_DEFAULT);
     $_POST['token']  = password_hash($_POST['uname'], PASSWORD_DEFAULT);
     #寫入語法,sql語法不分大小寫
@@ -138,14 +203,14 @@ function login(){
     $row = $result->fetch_assoc() or redirect_header ("index.php?op=login_form" , '帳號輸入錯誤' , 3000);
     
      //取出的資料陣列，是以欄位順序為陣列索引,一次一筆
-     $row['uname'] = htmlspecialchars($row['uname']); //文字過濾成字串
-     $row['uid'] =  (int)$row['uid']; //數字過濾成整數
-     $row['kind'] =  (int)$row['kind']; //數字過濾成整數
-     $row['name'] = htmlspecialchars($row['name']); //文字過濾成字串
-     $row['tel'] = htmlspecialchars($row['tel']); //文字過濾成字串
-     $row['email'] = htmlspecialchars($row['email']); //文字過濾成字串
-     $row['pass'] = htmlspecialchars($row['pass']); //文字過濾成字串
-     $row['token'] = htmlspecialchars($row['token']); //文字過濾成字串
+    $row['uname'] = htmlspecialchars($row['uname']);//字串
+    $row['uid'] = (int)$row['uid'];//整數
+    $row['kind'] = (int)$row['kind'];//整數
+    $row['name'] = htmlspecialchars($row['name']);//字串
+    $row['tel'] = htmlspecialchars($row['tel']);//字串
+    $row['email'] = htmlspecialchars($row['email']);//字串 
+    $row['pass'] = htmlspecialchars($row['pass']);//字串 
+    $row['token'] = htmlspecialchars($row['token']);//字串
     
     if(password_verify($_POST['pass'], $row['pass'])){ //$_POST['pass']外傳得值, $row['pass']資料庫的值
         //登入成功,↓將資料寫進會員資料中

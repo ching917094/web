@@ -1,5 +1,5 @@
 <{* body.tpl 頁面中間 *}>
-<{if $mainSlides.0.pic}>
+<{if $mainSlides}>
 <!-- 輪播圖 -->
 <style>
   .carousel-item {
@@ -16,19 +16,19 @@
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <{foreach $mainSlides as $index => $mainSlide}>
-        <li data-target="#carouselExampleIndicators" data-slide-to="<{$index}>" <{if $index == "0"}> class="active" <{/if}> ></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<{$index}>" <{if $index == '0'}>class="active" <{/if}> ></li>
       <{/foreach}>
     </ol>
     <div class="carousel-inner" role="listbox">
       <{foreach $mainSlides as $index => $mainSlide}>
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item <{if $index == "0"}> active <{/if}> " style="background-image: url('<{$mainSlide.pic}>')">
+        <div class="carousel-item <{if $index == '0'}>active <{/if}>" style="background-image: url('<{$mainSlide.pic}>')">
           <div class="carousel-caption d-none d-md-block">
             <h2 class="display-4"><{$mainSlide.title}></h2>
           </div>
         </div>
       <{/foreach}>
-      
+    </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -98,88 +98,25 @@
       <section id="portfolio">
         <div class="container-fluid p-0">
           <div class="row no-gutters">
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<{$xoImgUrl}>img/portfolio/fullsize/1.jpg">
-                <img class="img-fluid" src="<{$xoImgUrl}>img/portfolio/thumbnails/1.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
+            <{foreach $prods as $prod}>
+              <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="<{$prod.prod}>">
+                  <img class="img-fluid" src="<{$prod.prod}>" alt="<{$prod.title}>">
+                  <div class="portfolio-box-caption">
+                    <div class="project-category text-white-50">
+                      <{$prod.kinds_title}>
+                    </div>
+                    <div class="project-name">
+                      <{$prod.title}>
+                    </div>
                   </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<{$xoImgUrl}>img/portfolio/fullsize/2.jpg">
-                <img class="img-fluid" src="<{$xoImgUrl}>img/portfolio/thumbnails/2.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<{$xoImgUrl}>img/portfolio/fullsize/3.jpg">
-                <img class="img-fluid" src="<{$xoImgUrl}>img/portfolio/thumbnails/3.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<{$xoImgUrl}>img/portfolio/fullsize/4.jpg">
-                <img class="img-fluid" src="<{$xoImgUrl}>img/portfolio/thumbnails/4.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<{$xoImgUrl}>img/portfolio/fullsize/5.jpg">
-                <img class="img-fluid" src="<{$xoImgUrl}>img/portfolio/thumbnails/5.jpg" alt="">
-                <div class="portfolio-box-caption">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-              <a class="portfolio-box" href="<{$xoImgUrl}>img/portfolio/fullsize/6.jpg">
-                <img class="img-fluid" src="<{$xoImgUrl}>img/portfolio/thumbnails/6.jpg" alt="">
-                <div class="portfolio-box-caption p-3">
-                  <div class="project-category text-white-50">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </a>
-            </div>
+                </a>
+              </div>
+            <{/foreach}>
+            
           </div>
         </div>
       </section>
-    
       <!-- Call to Action Section -->
       <section class="page-section bg-dark text-white">
         <div class="container text-center">
